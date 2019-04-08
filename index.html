@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Tenemos un gobierno que no para de pasarnos la chota por la cara" />
+    <meta name="author" content="Martín Gaitán">
+
+    <meta property="og:url" content="https://mgaitan.github.io/en-pija/" />
+    <meta property="og:description" content="Tenemos un gobierno que no para de pasarnos la chota por la cara" />
+    <meta property="og:image" content="http://mgaitan.github.io/todos-somos-milagro/img/enpija.png"/>
+    />
+
+    <title>Broda plot generator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="styles.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Broda plot generator</a>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+      <canvas id="paper" width="600" height="700"></canvas>
+
+
+      <button class="btn" id="canvas2png">Exportar</button>
+
+       <a class="btn" href=".">Reiniciar</a>
+
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+          <a href="https://twitter.com/endemianado">Idea original del Demian</a>
+          <a href="http://github.com/mgaitan/en-pija">Generador online</a> por Martín Gaitán.
+        </span>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+
+    <script type="text/javascript">
+
+    $( document ).ready(function() {
+
+      var canvas = new fabric.Canvas('paper', { isDrawingMode: false });
+      var titleObject = new fabric.IText('III. POLARIZACION CON CFK VERSUS ESTABILIDAD FINANCIERA-\nCAMBIARIA', {
+        fontSize: 18
+      });
+      var axisXObject = new fabric.IText('Polarización \ncon CFK', {
+        fontSize: 16,
+        textAlign: 'right'
+      });
+      var axisYObject = new fabric.IText('Estabilidad\n Financiera', {
+        fontSize: 16,
+        textAlign: 'right'
+      });
+      canvas.add(titleObject.set({
+        left: 10,
+        top: 20
+      }));
+      canvas.add(axisXObject.set({
+        left: 510,
+        top: 450
+      }));
+      canvas.add(axisYObject.set({
+        left: 55,
+        top: 110
+      }));
+      canvas.renderAll()
+
+          $("#canvas2png").click(function(){
+              if(!window.localStorage){alert("This function is not supported by your browser."); return;}
+              // to PNG
+              window.open(canvas.toDataURL('jpg'));
+          });
+
+          // Adding objects to the canvas...
+
+          function set_background(){
+              fabric.Image.fromURL('img/broda.png', function(img) {
+                // img.scale((canvas.height * .9) / img.height);
+                canvas.setBackgroundImage(img).renderAll();
+              });
+          }
+          set_background();
+
+    });
+
+
+    </script>
+
+
+  </body>
+</html>
